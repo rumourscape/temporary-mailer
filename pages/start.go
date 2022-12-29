@@ -9,7 +9,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/rumourscape/temp-mail-app/components"
+	"github.com/rumourscape/temporary-mailer/components"
 )
 
 var vGap = layout.NewSpacer()

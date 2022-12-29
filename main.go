@@ -7,8 +7,8 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 
-	"github.com/rumourscape/temp-mail-app/components"
-	"github.com/rumourscape/temp-mail-app/pages"
+	"github.com/rumourscape/temporary-mailer/components"
+	"github.com/rumourscape/temporary-mailer/pages"
 )
 
 var windowSize = fyne.NewSize(800, 450)

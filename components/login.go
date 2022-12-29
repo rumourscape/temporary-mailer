@@ -5,7 +5,7 @@ import (
 
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/rumourscape/temp-mail-app/mailer"
+	"github.com/rumourscape/temporary-mailer/mailer"
 )
 
 func LoginForm() *widget.Form {

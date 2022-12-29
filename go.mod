@@ -1,4 +1,4 @@
-module github.com/rumourscape/temp-mail-app
+module github.com/rumourscape/temporary-mailer
 
 go 1.19
 
