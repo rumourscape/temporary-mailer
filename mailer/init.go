@@ -7,5 +7,16 @@ func InitClient() *mailtm.MailClient {
 	if err != nil {
 		panic(err)
 	}
+
+	client.GetDomains()
+
 	return client
+}
+
+func GetAddress() string {
+	return client.Account.Address
+}
+
+func GetPassword() string {
+	return client.Account.Password
 }

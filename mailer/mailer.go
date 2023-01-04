@@ -1,23 +1,78 @@
 package mailer
 
+import (
+	"log"
+	"time"
+
+	"github.com/felixstrobel/mailtm"
+)
+
 var client = InitClient()
 
 func Login(email, password string) bool {
-	err := getToken(email, password)
-	if err != nil {
+	token, err := client.GetAuthTokenCredentials(email, password)
+	if err != nil || token == "" {
+		log.Println(err)
 		return false
 	}
 
-	client.GetAuthToken()
+	log.Println(token)
 	return true
-
 }
 
-func getToken(email, password string) error {
-	_, err := client.GetAuthTokenCredentials(email, password)
+func NewAccount() error {
+	_, err := client.CreateAccount()
 	if err != nil {
+		log.Println("Error creating Account: " + err.Error())
+		return err
+	}
+
+	_, err = client.GetAuthToken()
+	if err != nil {
+		log.Println("Error getting AuthToken: " + err.Error())
 		return err
 	}
 
 	return nil
+}
+
+func GetMessages(page int) ([]mailtm.Message, error) {
+	messages, err := client.GetMessages(page)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	return messages, nil
+}
+
+func GetText(id string) string {
+	message, err := client.GetMessageByID(id)
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+
+	return message.Text
+}
+
+func Logout() {
+	client = InitClient()
+}
+
+func DeleteAccount() {
+	err := client.DeleteAccountByID(client.Account.ID)
+	if err != nil {
+		log.Println("Error deleting Account: " + err.Error())
+	}
+}
+
+func Messages() []mailtm.Message {
+	messages := []mailtm.Message{
+		{From: mailtm.Addressee{Address: "a@a"}, Subject: "Hello", CreatedAt: time.Now()},
+		{From: mailtm.Addressee{Address: "b@b"}, Subject: "Test", CreatedAt: time.Now()},
+		{From: mailtm.Addressee{Address: "c@c"}, Subject: "Test2", CreatedAt: time.Now()},
+	}
+
+	return messages
 }

@@ -1,8 +1,6 @@
 package main
 
 import (
-	_ "embed"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -11,25 +9,23 @@ import (
 	"github.com/rumourscape/temporary-mailer/pages"
 )
 
-var windowSize = fyne.NewSize(800, 450)
+var windowSize = fyne.NewSize(960, 540)
 
 func main() {
 	a := app.New()
 
-	w := a.NewWindow("Temporary Mailer")
-	w.Resize(windowSize)
-	w.SetPadded(false)
-	w.CenterOnScreen()
-	w.SetFixedSize(true)
+	win := a.NewWindow("Temporary Mailer")
+	win.Resize(windowSize)
+	win.SetPadded(false)
+	win.CenterOnScreen()
+	win.SetFixedSize(true)
 
 	bg := components.BackgroundImage()
-	home := pages.Start()
+	home := pages.Start(&win)
 
 	MainContainer := container.NewMax(bg, home)
 
-	w.SetContent(MainContainer)
-	//get the size of the window
-	//w.Canvas().Size()
+	win.SetContent(MainContainer)
 
-	w.ShowAndRun()
+	win.ShowAndRun()
 }

@@ -2,6 +2,7 @@ package pages
 
 import (
 	"image/color"
+	"log"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -10,13 +11,34 @@ import (
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/rumourscape/temporary-mailer/components"
+	"github.com/rumourscape/temporary-mailer/mailer"
 )
 
-var vGap = layout.NewSpacer()
+var gap = layout.NewSpacer()
 
-func Start() *fyne.Container {
+func Start(win *fyne.Window) *fyne.Container {
+	mainCanvas := (*win).Canvas()
+
+	errorPopup := components.LoginError(&mainCanvas, "")
+
 	form := components.LoginForm()
 	form.Hide()
+	form.OnSubmit = func() {
+		email := form.Items[0].Widget.(*widget.Entry)
+		password := form.Items[1].Widget.(*widget.Entry)
+		login := mailer.Login(email.Text, password.Text)
+		log.Println(login)
+		if login {
+			// Login successful
+			log.Println("Login successful")
+			SetPage(win, "dashboard")
+		} else {
+			// Login failed
+			log.Println("Login failed")
+			errorPopup = components.LoginError(&mainCanvas, "Invalid Email or Password")
+			errorPopup.Show()
+		}
+	}
 
 	title := canvas.NewText("Temporary Mailer", color.White)
 	title.Alignment = fyne.TextAlignCenter
@@ -24,14 +46,22 @@ func Start() *fyne.Container {
 	title.TextSize = 30
 	title.Resize(fyne.NewSize(400, 50))
 
-	oldAccount := widget.NewButton("Login with an existing Account", func() { form.Show() })
-
-	newAccount := widget.NewButton("Create a new Account", func() {})
+	newAccount := widget.NewButton("Create a new Account", func() {
+		err := mailer.NewAccount()
+		if err != nil {
+			errorPopup = components.LoginError(&mainCanvas, err.Error())
+			errorPopup.Show()
+		}
+		SetPage(win, "dashboard")
+	})
 	newAccount.Importance = widget.HighImportance
 
-	vContainer := container.NewVBox(title, vGap, form, oldAccount, newAccount, vGap)
-	vContainer.Resize(fyne.NewSize(400, 350))
-	vContainer.Move(fyne.NewPos(200, 50))
+	oldAccount := widget.NewButton("Login with an existing Account", func() {})
+	oldAccount.OnTapped = func() { form.Show(); oldAccount.Hide(); newAccount.SetText("Create a new Account instead") }
 
-	return container.NewWithoutLayout(vContainer)
+	vContainer := container.NewVBox(title, gap, form, oldAccount, newAccount, gap)
+	vContainer.Resize(fyne.NewSize(400, 400))
+	vContainer.Move(fyne.NewPos(280, 70))
+
+	return container.NewWithoutLayout(vContainer, errorPopup)
 }
