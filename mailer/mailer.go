@@ -2,7 +2,6 @@ package mailer
 
 import (
 	"log"
-	"time"
 
 	"github.com/felixstrobel/mailtm"
 )
@@ -65,14 +64,4 @@ func DeleteAccount() {
 	if err != nil {
 		log.Println("Error deleting Account: " + err.Error())
 	}
-}
-
-func Messages() []mailtm.Message {
-	messages := []mailtm.Message{
-		{From: mailtm.Addressee{Address: "a@a"}, Subject: "Hello", CreatedAt: time.Now()},
-		{From: mailtm.Addressee{Address: "b@b"}, Subject: "Test", CreatedAt: time.Now()},
-		{From: mailtm.Addressee{Address: "c@c"}, Subject: "Test2", CreatedAt: time.Now()},
-	}
-
-	return messages
 }
