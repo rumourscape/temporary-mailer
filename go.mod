@@ -10,6 +10,7 @@ require (
 	fyne.io/systray v1.10.1-0.20221115204952-d16a6177e6f1 // indirect
 	github.com/benoitkugler/textlayout v0.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/donovanhide/eventsource v0.0.0-20210830082556-c59027999da0
 	github.com/felixstrobel/mailtm v0.1.1-0.20220110134750-e5d5628d24b8
 	github.com/fredbi/uri v1.0.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect

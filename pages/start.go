@@ -27,7 +27,7 @@ func Start(win *fyne.Window) *fyne.Container {
 		email := form.Items[0].Widget.(*widget.Entry)
 		password := form.Items[1].Widget.(*widget.Entry)
 		login := mailer.Login(email.Text, password.Text)
-		log.Println(login)
+
 		if login {
 			// Login successful
 			log.Println("Login successful")

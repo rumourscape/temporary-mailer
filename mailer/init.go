@@ -20,3 +20,11 @@ func GetAddress() string {
 func GetPassword() string {
 	return client.Account.Password
 }
+
+func GetId() string {
+	return client.Account.ID
+}
+
+func GetToken() string {
+	return client.Token
+}

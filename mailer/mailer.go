@@ -15,7 +15,7 @@ func Login(email, password string) bool {
 		return false
 	}
 
-	log.Println(token)
+	//log.Println(token)
 	return true
 }
 

@@ -1,0 +1,6 @@
+[Details]
+  Icon = "assets/Icon.png"
+  Name = "Temp Mail"
+  ID = "com.github.rumourscape.temporary-mailer"
+  Version = "1.0.0"
+  Build = 4
