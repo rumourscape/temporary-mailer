@@ -12,8 +12,8 @@ Temp Mail is a GUI application that creates a temporary email using the mail.tm 
 
 This application is built using the following packages:
 - [fyne](https://github.com/fyne-io/fyne) (version 2.3.0 or later)
-- [mailtm](github.com/felixstrobel/mailtm)
-- [eventsource](github.com/donovanhide/eventsource)
+- [mailtm](https://github.com/felixstrobel/mailtm)
+- [eventsource](https://github.com/donovanhide/eventsource)
 
 
 ## Features
