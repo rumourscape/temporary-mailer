@@ -4,17 +4,8 @@ Temp Mail is a GUI application that creates a temporary email using the mail.tm 
 <p align="center">
   <br />
   <img
-    src="assets/Screenshot1.png"
-    alt="Temp Mail Application"
-    width="481"
-    height="261"
-  />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img
     src="assets/Screenshot2.png"
     alt="Temp Mail Application"
-    width="481"
-    height="261"
     />
 
 </p>
